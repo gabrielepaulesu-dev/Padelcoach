@@ -1,6 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 
+const video = [
+  { id: 1, titolo: "Dritto perfetto", durata: "12:30", categoria: "Tecnica", thumb: "/download.jpg" },
+  { id: 2, titolo: "Smorzata + lob", durata: "8:45", categoria: "Tattica", thumb: "/F4LUCJ4JARLCDESPQBZMW3LBTY.jpg" },
+  { id: 3, titolo: "Allenamento completo", durata: "45:00", categoria: "Allenamento", thumb: "/e-padel-mania-ci-si-diverte-subito-e-si-socializza.webp" },
+  { id: 4, titolo: "Rovescio slice", durata: "10:15", categoria: "Tecnica", thumb: "/download.jpg" },
+  { id: 5, titolo: "Posizione in campo", durata: "6:20", categoria: "Tattica", thumb: "/F4LUCJ4JARLCDESPQBZMW3LBTY.jpg" },
+];
+
 export default function Home() {
   const [avatar, setAvatar] = useState<string | null>(null);
   const [nome, setNome] = useState("Luca Bianchi");
@@ -56,7 +64,7 @@ export default function Home() {
       </div>
 
       {/* Prossima lezione */}
-      <div style={{ margin: "0 20px 16px", borderRadius: 20, padding: 20, backgroundColor: "#141829", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+      <div style={{ margin: "0 20px 20px", borderRadius: 20, padding: 20, backgroundColor: "#141829", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div>
           <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: "#84CC16", marginBottom: 10 }}>PROSSIMA LEZIONE</p>
           <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
@@ -72,7 +80,7 @@ export default function Home() {
       </div>
 
       {/* Griglia 3 sezioni */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, margin: "0 20px 16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, margin: "0 20px 24px" }}>
         <a href="/calendario" style={{ textDecoration: "none" }}>
           <div style={{ borderRadius: 20, padding: 16, backgroundColor: "#141829", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
             <div style={{ width: 48, height: 48, borderRadius: 14, backgroundColor: "#3B82F620", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -99,22 +107,38 @@ export default function Home() {
         </a>
       </div>
 
-      {/* Panoramica di oggi */}
-      <div style={{ margin: "0 20px 16px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
-          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#94A3B8" }}>PANORAMICA DI OGGI</p>
+      {/* Rail video lezioni */}
+      <div style={{ marginBottom: 24 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 20px", marginBottom: 14 }}>
+          <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#94A3B8" }}>VIDEO LEZIONI</p>
           <p style={{ fontSize: 12, fontWeight: 600, color: "#84CC16" }}>Vedi tutto</p>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
-          {[
-            { label: "Lezioni", value: "12", delta: "+20%" },
-            { label: "Ore totali", value: "7h30", delta: "+15%" },
-            { label: "Allievi", value: "24", delta: "+10%" },
-          ].map((s) => (
-            <div key={s.label} style={{ borderRadius: 16, padding: 14, backgroundColor: "#141829" }}>
-              <p style={{ fontSize: 11, color: "#94A3B8", marginBottom: 6 }}>{s.label}</p>
-              <p style={{ fontSize: 22, fontWeight: 900, color: "#FFF", marginBottom: 4 }}>{s.value}</p>
-              <p style={{ fontSize: 11, color: "#84CC16" }}>{s.delta} vs ieri</p>
+        <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingLeft: 20, paddingRight: 20, paddingBottom: 8, scrollbarWidth: "none" }}>
+          {video.map((v) => (
+            <div key={v.id} style={{ flexShrink: 0, width: 160, borderRadius: 16, overflow: "hidden", backgroundColor: "#141829", cursor: "pointer", position: "relative" }}
+              onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+              onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
+              onTouchStart={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
+              onTouchEnd={(e) => (e.currentTarget.style.transform = "scale(1)")}
+            >
+              {/* Thumbnail */}
+              <div style={{ position: "relative", height: 100 }}>
+                <img src={v.thumb} alt={v.titolo} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.35)" }} />
+                {/* Play button */}
+                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 36, height: 36, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.25)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <span style={{ fontSize: 14, marginLeft: 2 }}>▶</span>
+                </div>
+                {/* Durata */}
+                <div style={{ position: "absolute", bottom: 6, right: 6, backgroundColor: "rgba(0,0,0,0.7)", borderRadius: 6, padding: "2px 6px" }}>
+                  <span style={{ fontSize: 10, fontWeight: 700, color: "#FFF" }}>{v.durata}</span>
+                </div>
+              </div>
+              {/* Info */}
+              <div style={{ padding: "10px 12px 12px" }}>
+                <p style={{ fontSize: 12, fontWeight: 700, color: "#FFF", marginBottom: 4, lineHeight: 1.3 }}>{v.titolo}</p>
+                <span style={{ fontSize: 10, fontWeight: 700, color: "#84CC16", backgroundColor: "#84CC1615", padding: "2px 8px", borderRadius: 6 }}>{v.categoria}</span>
+              </div>
             </div>
           ))}
         </div>
