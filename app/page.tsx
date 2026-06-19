@@ -3,10 +3,13 @@ import { useEffect, useState } from "react";
 
 export default function Home() {
   const [avatar, setAvatar] = useState<string | null>(null);
+  const [nome, setNome] = useState("Luca Bianchi");
 
   useEffect(() => {
-    const saved = localStorage.getItem("juego_avatar");
-    if (saved) setAvatar(saved);
+    const savedAvatar = localStorage.getItem("juego_avatar");
+    if (savedAvatar) setAvatar(savedAvatar);
+    const savedNome = localStorage.getItem("juego_nome");
+    if (savedNome) setNome(savedNome);
   }, []);
 
   return (
@@ -37,7 +40,7 @@ export default function Home() {
         <div>
           <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", color: "#94A3B8", marginBottom: 6 }}>BENTORNATO, MAESTRO</p>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
-            <h1 style={{ fontSize: 28, fontWeight: 900, color: "#FFF", margin: 0 }}>Luca Bianchi</h1>
+            <h1 style={{ fontSize: 28, fontWeight: 900, color: "#FFF", margin: 0 }}>{nome}</h1>
             <div style={{ width: 22, height: 22, borderRadius: "50%", backgroundColor: "#84CC16", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, color: "#0A0E1A" }}>★</div>
           </div>
           <p style={{ fontSize: 13, color: "#94A3B8", margin: 0 }}>Maestro Nazionale</p>
