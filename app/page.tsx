@@ -159,7 +159,7 @@ export default function Home() {
             {/* Logo FITP in alto a sinistra */}
 <div style={{ marginBottom: 16 }}>
   <img 
-    src="/Federazione_Italiana_Tennis_e_Padel_-_Logo_2023.png" 
+    src="/logo_bianco.svg"
     alt="FITP Logo" 
     style={{ height: 50, width: "auto", objectFit: "contain" }} 
   />
