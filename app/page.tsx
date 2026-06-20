@@ -115,26 +115,22 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingLeft: 20, paddingRight: 20, paddingBottom: 8, scrollbarWidth: "none" }}>
           {video.map((v) => (
-            <div key={v.id} style={{ flexShrink: 0, width: 160, borderRadius: 16, overflow: "hidden", backgroundColor: "#141829", cursor: "pointer", position: "relative" }}
+            <div key={v.id} style={{ flexShrink: 0, width: 160, borderRadius: 16, overflow: "hidden", backgroundColor: "#141829", cursor: "pointer", position: "relative", transition: "transform 120ms ease" }}
               onMouseDown={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
               onTouchStart={(e) => (e.currentTarget.style.transform = "scale(0.97)")}
               onTouchEnd={(e) => (e.currentTarget.style.transform = "scale(1)")}
             >
-              {/* Thumbnail */}
               <div style={{ position: "relative", height: 100 }}>
                 <img src={v.thumb} alt={v.titolo} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                 <div style={{ position: "absolute", inset: 0, backgroundColor: "rgba(0,0,0,0.35)" }} />
-                {/* Play button */}
-                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 36, height: 36, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.25)", backdropFilter: "blur(4px)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: 36, height: 36, borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <span style={{ fontSize: 14, marginLeft: 2 }}>▶</span>
                 </div>
-                {/* Durata */}
                 <div style={{ position: "absolute", bottom: 6, right: 6, backgroundColor: "rgba(0,0,0,0.7)", borderRadius: 6, padding: "2px 6px" }}>
                   <span style={{ fontSize: 10, fontWeight: 700, color: "#FFF" }}>{v.durata}</span>
                 </div>
               </div>
-              {/* Info */}
               <div style={{ padding: "10px 12px 12px" }}>
                 <p style={{ fontSize: 12, fontWeight: 700, color: "#FFF", marginBottom: 4, lineHeight: 1.3 }}>{v.titolo}</p>
                 <span style={{ fontSize: 10, fontWeight: 700, color: "#84CC16", backgroundColor: "#84CC1615", padding: "2px 8px", borderRadius: 6 }}>{v.categoria}</span>
@@ -145,17 +141,43 @@ export default function Home() {
       </div>
 
       {/* Banner FITP */}
-      <div style={{ margin: "0 20px 16px", borderRadius: 20, padding: 20, backgroundColor: "#141829", border: "1px solid #84CC1630", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-        <div>
-          <p style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", color: "#84CC16", marginBottom: 8 }}>FITP</p>
-          <p style={{ fontSize: 17, fontWeight: 900, color: "#FFF", lineHeight: 1.3, marginBottom: 4 }}>Le risorse per<br />i Maestri FITP</p>
-          <p style={{ fontSize: 12, color: "#94A3B8" }}>Scopri contenuti, strumenti e news</p>
+      <a href="https://management.federtennis.it/sign-in" target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", display: "block", margin: "0 20px 16px" }}>
+        <div style={{ borderRadius: 20, padding: "24px 20px", background: "linear-gradient(135deg, #050F20 0%, #0A1A35 50%, #0D2040 100%)", border: "1px solid #1B3357", position: "relative", overflow: "hidden", minHeight: 180 }}>
+
+          {/* Linee curve tricolore sfondo destra */}
+          <div style={{ position: "absolute", top: 0, right: 0, width: "55%", height: "100%", zIndex: 0 }}>
+            <svg viewBox="0 0 280 180" style={{ width: "100%", height: "100%" }} preserveAspectRatio="none">
+              <path d="M280 -20 Q160 60 0 180" stroke="#84CC16" strokeWidth="2" fill="none" opacity="0.7"/>
+              <path d="M280 20 Q170 90 20 180" stroke="#3B82F6" strokeWidth="1.5" fill="none" opacity="0.6"/>
+              <path d="M280 60 Q190 120 40 180" stroke="#EF4444" strokeWidth="1.2" fill="none" opacity="0.5"/>
+              <path d="M280 0 Q150 70 -10 160" stroke="#84CC16" strokeWidth="1" fill="none" opacity="0.2"/>
+            </svg>
+          </div>
+
+          {/* Contenuto */}
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {/* Logo FITP in alto a sinistra */}
+<div style={{ marginBottom: 16 }}>
+  <img 
+    src="/Federazione_Italiana_Tennis_e_Padel_-_Logo_2023.png" 
+    alt="FITP Logo" 
+    style={{ height: 50, width: "auto", objectFit: "contain" }} 
+  />
+</div>
+
+            {/* Testo */}
+            <h2 style={{ fontSize: 26, fontWeight: 900, color: "#FFF", margin: "0 0 8px", lineHeight: 1.2 }}>Area FITP</h2>
+            <p style={{ fontSize: 14, color: "#94A3B8", margin: "0 0 20px", lineHeight: 1.5 }}>Strumenti, contenuti e news<br />per la tua crescita professionale.</p>
+
+            {/* CTA */}
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 10, backgroundColor: "#84CC16", padding: "12px 22px", borderRadius: 100, cursor: "pointer" }}>
+              <span style={{ fontSize: 14, fontWeight: 800, color: "#0A0E1A" }}>Vai a FITP Management</span>
+              <span style={{ fontSize: 16, color: "#0A0E1A", fontWeight: 900 }}>→</span>
+            </div>
+          </div>
+
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontSize: 44 }}>🎾</span>
-          <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#84CC16", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#0A0E1A", fontWeight: 700 }}>›</div>
-        </div>
-      </div>
+      </a>
 
       {/* Bottom Navigation */}
       <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, padding: "12px 20px 28px", backgroundColor: "#0A0E1Aee" }}>
